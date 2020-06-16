@@ -1,8 +1,6 @@
 package org.astelit.itunes.repository;
 
 import org.astelit.itunes.dto.SearchRequest;
-import org.astelit.itunes.dto.playlist.PlaylistSearchRequest;
-import org.astelit.itunes.entity.Playlist;
 import org.astelit.itunes.entity.Singer;
 import org.springframework.data.domain.Page;
 import org.springframework.data.jpa.domain.Specification;

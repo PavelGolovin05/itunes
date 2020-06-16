@@ -3,7 +3,6 @@ package org.astelit.itunes.entity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.astelit.itunes.contstraint.Cyrillic;
 
 import javax.persistence.*;
 
@@ -14,7 +13,6 @@ import javax.persistence.*;
 @NoArgsConstructor
 public class Song extends BaseEntity{
 
-    @Cyrillic
     private String name;
 
     private long duration;

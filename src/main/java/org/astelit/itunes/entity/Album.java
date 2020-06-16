@@ -22,6 +22,8 @@ public class Album extends BaseEntity{
     @Enumerated(EnumType.STRING)
     private Genre genre;
 
+    private long date_realize;
+
     @OneToMany(mappedBy = "album", fetch = FetchType.LAZY)
     private Set<Song> songs = new HashSet<>();
 

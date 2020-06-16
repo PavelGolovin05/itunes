@@ -15,7 +15,7 @@ import static org.astelit.itunes.utils.Exceptions.SINGER_NOT_FOUND;
 @Service
 @RequiredArgsConstructor
 public class SingerService {
-    public final SingerRepository singerRepository;
+    private final SingerRepository singerRepository;
 
     public SingerResponse create(SingerCreateRequest request) {
         Singer singer = new Singer();
