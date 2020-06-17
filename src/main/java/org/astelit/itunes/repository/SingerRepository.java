@@ -1,6 +1,6 @@
 package org.astelit.itunes.repository;
 
-import org.astelit.itunes.dto.SearchRequest;
+import org.astelit.itunes.dto.filters.SingerFilter;
 import org.astelit.itunes.entity.Singer;
 import org.springframework.data.domain.Page;
 import org.springframework.data.jpa.domain.Specification;
@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public interface SingerRepository extends JpaRepository<Singer, Long>, JpaSpecificationExecutor<Singer> {
-    default Page<Singer> search(SearchRequest request) {
+    default Page<Singer> search(SingerFilter request) {
         return findAll((Specification<Singer>) (root, query, cb) -> {
             List<Predicate> predicates = new ArrayList<>();
 

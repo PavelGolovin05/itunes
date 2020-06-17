@@ -5,6 +5,7 @@ import org.astelit.itunes.dto.SearchRequest;
 import org.astelit.itunes.dto.album.AlbumCreateRequest;
 import org.astelit.itunes.dto.album.AlbumResponse;
 import org.astelit.itunes.dto.album.AlbumUpdateRequest;
+import org.astelit.itunes.dto.filters.AlbumFilter;
 import org.astelit.itunes.entity.Album;
 import org.astelit.itunes.repository.AlbumRepository;
 import org.astelit.itunes.repository.SingerRepository;
@@ -45,7 +46,12 @@ public class AlbumService {
         return new AlbumResponse(album);
     }
 
-    public Page<AlbumResponse> search(SearchRequest request) {
+    public void delete(long id) {
+        Album album = albumRepository.findById(id).orElseThrow(ALBUM_NOT_FOUND);
+        albumRepository.delete(album);
+    }
+
+    public Page<AlbumResponse> search(AlbumFilter request) {
         return albumRepository.search(request).map(AlbumResponse::new);
     }
 }

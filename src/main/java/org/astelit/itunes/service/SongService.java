@@ -5,6 +5,7 @@ import org.astelit.itunes.dto.SearchRequest;
 import org.astelit.itunes.dto.album.AlbumCreateRequest;
 import org.astelit.itunes.dto.album.AlbumResponse;
 import org.astelit.itunes.dto.album.AlbumUpdateRequest;
+import org.astelit.itunes.dto.filters.SongFilter;
 import org.astelit.itunes.dto.song.SongCreateRequest;
 import org.astelit.itunes.dto.song.SongResponse;
 import org.astelit.itunes.dto.song.SongUpdateRequest;
@@ -48,7 +49,12 @@ public class SongService {
         return new SongResponse(song);
     }
 
-    public Page<SongResponse> search(SearchRequest request) {
+    public void delete(long id) {
+        Song song = songRepository.findById(id).orElseThrow(SONG_NOT_FOUND);
+        songRepository.delete(song);
+    }
+
+    public Page<SongResponse> search(SongFilter request) {
         return songRepository.search(request).map(SongResponse::new);
     }
 }

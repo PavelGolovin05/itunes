@@ -24,7 +24,7 @@ public class Album extends BaseEntity{
 
     private long date_realize;
 
-    @OneToMany(mappedBy = "album", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "album", fetch = FetchType.LAZY, cascade=CascadeType.ALL)
     private Set<Song> songs = new HashSet<>();
 
     @ManyToOne(fetch = FetchType.LAZY)

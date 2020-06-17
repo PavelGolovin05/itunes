@@ -6,10 +6,7 @@ import lombok.Setter;
 import org.astelit.itunes.contstraint.Cyrillic;
 import org.astelit.itunes.contstraint.Login;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -25,6 +22,6 @@ public class User extends BaseEntity {
     @Cyrillic
     private String name;
 
-    @OneToMany(mappedBy = "author", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "author", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Playlist> playlists = new HashSet<>();
 }

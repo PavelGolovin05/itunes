@@ -6,6 +6,8 @@ import lombok.Setter;
 import org.astelit.itunes.contstraint.PlaylistName;
 
 import javax.validation.constraints.NotNull;
+import java.util.HashSet;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -17,5 +19,5 @@ public class PlaylistCreateRequest {
     @NotNull
     private Long author;
 
-    // TODO: tracks
+    private Set<Long> songs = new HashSet<>();
 }

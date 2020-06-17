@@ -16,39 +16,44 @@ import static org.astelit.itunes.utils.Exceptions.USER_NOT_FOUND;
 @Service
 @RequiredArgsConstructor
 public class UserService {
-    private final UserRepository repository;
+    private final UserRepository userRepository;
 
     public UserResponse create(CreateUserRequest request) {
-        if (repository.existsByLogin(request.getLogin()))
+        if (userRepository.existsByLogin(request.getLogin()))
             throw new BadRequestException("Login " + request.getLogin() + " already taken");
 
         User user = new User();
         user.setLogin(request.getLogin());
         user.setName(request.getName());
 
-        repository.save(user);
+        userRepository.save(user);
         return new UserResponse(user);
     }
 
     public UserResponse update(UpdateUserRequest request) {
-        if (repository.existsByLoginAndIdNot(request.getLogin(), request.getId()))
+        if (userRepository.existsByLoginAndIdNot(request.getLogin(), request.getId()))
             throw new BadRequestException("Login " + request.getLogin() + " already taken");
 
-        User user = repository.findById(request.getId()).orElseThrow(USER_NOT_FOUND);
+        User user = userRepository.findById(request.getId()).orElseThrow(USER_NOT_FOUND);
         user.setLogin(request.getLogin());
         user.setName(request.getName());
 
-        repository.save(user);
+        userRepository.save(user);
         return new UserResponse(user);
     }
 
     public UserResponse view(long id) {
-        User user = repository.findById(id).orElseThrow(USER_NOT_FOUND);
+        User user = userRepository.findById(id).orElseThrow(USER_NOT_FOUND);
         return new UserResponse(user);
     }
 
+    public void delete(long id) {
+        User user = userRepository.findById(id).orElseThrow(USER_NOT_FOUND);
+        userRepository.delete(user);
+    }
+
     public Page<UserResponse> search(SearchRequest request) {
-        return repository.findByLoginIsLikeOrderByLoginAsc(request.getQuery(), request.pageable())
+        return userRepository.findByLoginIsLikeOrderByLoginAsc(request.getQuery(), request.pageable())
                 .map(UserResponse::new);
     }
 }

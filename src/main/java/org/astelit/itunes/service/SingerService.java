@@ -2,6 +2,7 @@ package org.astelit.itunes.service;
 
 import lombok.RequiredArgsConstructor;
 import org.astelit.itunes.dto.SearchRequest;
+import org.astelit.itunes.dto.filters.SingerFilter;
 import org.astelit.itunes.dto.singer.SingerCreateRequest;
 import org.astelit.itunes.dto.singer.SingerResponse;
 import org.astelit.itunes.dto.singer.SingerUpdateRequest;
@@ -37,7 +38,12 @@ public class SingerService {
         return new SingerResponse(singer);
     }
 
-    public Page<SingerResponse> search(SearchRequest request) {
+    public void delete(long id) {
+        Singer singer = singerRepository.findById(id).orElseThrow(SINGER_NOT_FOUND);
+        singerRepository.delete(singer);
+    }
+
+    public Page<SingerResponse> search(SingerFilter request) {
         return singerRepository.search(request).map(SingerResponse::new);
     }
 }

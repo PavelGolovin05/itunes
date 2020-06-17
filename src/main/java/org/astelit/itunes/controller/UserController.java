@@ -32,6 +32,9 @@ public class UserController {
         return userService.view(id);
     }
 
+    @DeleteMapping("{id}")
+    public void delete(@PathVariable long id) { userService.delete(id); }
+
     @GetMapping
     public Page<UserResponse> search(SearchRequest request) {
         return userService.search(request);

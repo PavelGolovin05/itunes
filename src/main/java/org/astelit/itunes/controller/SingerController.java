@@ -1,7 +1,9 @@
 package org.astelit.itunes.controller;
 
+import liquibase.pro.packaged.D;
 import lombok.RequiredArgsConstructor;
 import org.astelit.itunes.dto.SearchRequest;
+import org.astelit.itunes.dto.filters.SingerFilter;
 import org.astelit.itunes.dto.singer.SingerCreateRequest;
 import org.astelit.itunes.dto.singer.SingerResponse;
 import org.astelit.itunes.dto.singer.SingerUpdateRequest;
@@ -32,8 +34,11 @@ public class SingerController {
         return singerService.view(id);
     }
 
+    @DeleteMapping("{id}")
+    public void delete(@PathVariable long id) { singerService.delete(id);}
+
     @GetMapping
-    public Page<SingerResponse> search(SearchRequest request) {
+    public Page<SingerResponse> search(SingerFilter request) {
         return singerService.search(request);
     }
 }

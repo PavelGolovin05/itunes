@@ -3,12 +3,9 @@ package org.astelit.itunes.entity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.astelit.itunes.contstraint.Cyrillic;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -19,9 +16,9 @@ import java.util.Set;
 @NoArgsConstructor
 public class Singer extends BaseEntity{
 
-    @Cyrillic
+    @NotEmpty
     private String name;
 
-    @OneToMany(mappedBy = "singer", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "singer", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Album> albums = new HashSet<>();
 }

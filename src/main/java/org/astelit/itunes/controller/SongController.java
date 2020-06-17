@@ -2,6 +2,7 @@ package org.astelit.itunes.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.astelit.itunes.dto.SearchRequest;
+import org.astelit.itunes.dto.filters.SongFilter;
 import org.astelit.itunes.dto.song.SongCreateRequest;
 import org.astelit.itunes.dto.song.SongResponse;
 import org.astelit.itunes.dto.song.SongUpdateRequest;
@@ -32,8 +33,11 @@ public class SongController {
         return songService.view(id);
     }
 
+    @DeleteMapping("{id}")
+    public void delete(@PathVariable long id) { songService.delete(id);}
+
     @GetMapping
-    public Page<SongResponse> search(SearchRequest request) {
+    public Page<SongResponse> search(SongFilter request) {
         return songService.search(request);
     }
 }
